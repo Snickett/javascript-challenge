@@ -16,8 +16,8 @@ button.on("click", function() {
   console.log(inputValue);
   console.log(tableData);
 
-//   var filteredData = tableData.filter(input1 => input1.datetime.toLowerCase() === input1.toLowerCase());
-  var filteredData = tableData.filter(input1 => input1.datetime);
+//   var filteredData = tableData.filter(input1 => input1.datetime.toLowerCase() === inputValue.toLowerCase());
+  var filteredData = tableData.filter(input1 => input1.datetime  == inputValue);
 
   console.log(filteredData);
 
@@ -33,7 +33,7 @@ button.on("click", function() {
   var commento = data.comments;
 
   // Then, select the table
-  var output = d3.select("#ufo-table")
+  var output = d3.select(".output>tbody>tr")
 
   // remove any data from the table
   output.html("");
