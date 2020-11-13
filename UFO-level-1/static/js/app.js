@@ -23,28 +23,80 @@ button.on("click", function() {
 
   //  array?
   var datetime = filteredData.map(input1 => input1.datetime);
+  var state = filteredData.map(input1 => input1.state);
+
+
+  // console.log(datetime);
+  // console.log(filteredData.length);
 
   // store values?
-  var city = data.city;
-  var state = data.state;
-  var country = data.country;
-  var shape = data.shape;
-  var duration = data.duration;
-  var commento = data.comments;
+  var city = filteredData.city;
+  var state = filteredData.state;
+  var country = filteredData.country;
+  var shape = filteredData.shape;
+  var duration = filteredData.duration;
+  var commento = filteredData.comments;
+  var dateo = filteredData.map(row => row[0]);
 
-  // Then, select the table
-  var output = d3.select(".output>tbody>tr")
+  console.log(datetime)
+  console.log(state)
+
+// d3.json(filteredData).then(function(data) {
+//     var dateo = data.dataset.data.map(row => row[0]);
+//     var city = data.dataset.data.map(row => row[1]);
+//     var state = data.dataset.data.map(row => row[2]);
+//     var country = data.dataset.data.map(row => row[3]);
+//     var shape = data.dataset.data.map(row => row[4]);
+//     var duration = data.dataset.data.map(row => row[5]);
+//     var commento = data.dataset.data.map(row => row[6]);
+//     buildTable(dateo, city, state, country, shape, duration, commento);
+  // });
+
+  console.log(commento);
 
   // remove any data from the table
-  output.html("");
+  // output.html("");
 
-  // append stats to the table
-//   output.append("td").text(datetime);
-  output.append("td").text("dora")
-  output.append("td").text(city);
-  output.append("td").text(state);
-  output.append("td").text(country);
-  output.append("td").text(shape);
-  output.append("td").text(duration);
-  output.append("td").text(commento);
+// });
+
+// function buildTable(datetime, city, state, country, shape, duration,commento) {
+//     var table = d3.select("#ufo-table");
+//     var tbody = table.select("tbody");
+//     var trow;
+//     for (var i = 0; i < filteredData.length; i++) {
+//       trow = tbody.append("tr");
+//       trow.append("td").text(datetime[i]);
+//     }
+//   };
+
+
+
+// NEW STUFF //
+
+  function generateTableHead(table, data2) {
+    let thead = table.createTHead();
+    let row = thead.insertRow();
+    for (let key of data2) {
+      let th = document.createElement("th");
+      let text = document.createTextNode(key);
+      th.appendChild(text);
+      row.appendChild(th);
+    }
+  }
+
+  function generateTable(table, data2) {
+    for (let element of data2) {
+      let row = table.insertRow();
+      for (key in element) {
+        let cell = row.insertCell();
+        let text = document.createTextNode(element[key]);
+        cell.appendChild(text);
+      }
+    }
+  }
+  
+  let table = document.querySelector("table");
+  let data2 = Object.keys(filteredData[0]);
+  generateTableHead(table, data2);
+  generateTable(table, filteredData);
 });
